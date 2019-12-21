@@ -9,6 +9,7 @@ using std::string;
 void square() {
     const unsigned size = 5;
 
+    // invariant: we have printed y lines
     for (unsigned int y = 0; y < size; y++) {
         if (y == 0 || y == size - 1) {
             string stars(size, '*');
@@ -45,15 +46,17 @@ void triangle()
     const unsigned int mid = (cols - 1) / 2;
 
     for (unsigned int r = 0; r < rows; r++) {
-        if (r == rows - 1) {
+        // it's the top row
+        if (r == 0) {
+            string spaces(mid, ' ');
+            cout << spaces << "*" << spaces << endl;
+
+        // it's the bottom row
+        } else if (r == rows - 1) {
             string stars(cols, '*');
             cout << stars << endl;
-        } else if (r == 0) {
-            string spaces(mid, ' ');
-            cout << spaces;
-            cout << "*";
-            cout << spaces;
-            cout << endl;
+
+        // it's a row in between top and bottom
         } else {
             const unsigned int outside = mid - r;
             const unsigned int inside = (mid - outside - 1) * 2 + 1;
@@ -61,11 +64,7 @@ void triangle()
             string spaces_outside(outside, ' ');
             string spaces_inside(inside, ' ');
 
-            cout << spaces_outside;
-            cout << "*";
-            cout << spaces_inside;
-            cout << "*";
-            cout << endl;
+            cout << spaces_outside << "*" << spaces_inside << "*" << endl;
         }
     }
 }
